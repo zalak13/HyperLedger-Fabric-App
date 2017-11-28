@@ -1,0 +1,181 @@
+<div class="modal fade" id="addUserModal" tabindex="-1" role="dialog" aria-labelledby="addUserModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="addUserModalLabel">Add User</h4>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+
+
+
+              <div class="form-group text-left">
+                <label for="userId">userId</label>
+
+                  <input formControlName="userId" type="text" class="form-control">
+
+              </div>
+
+
+
+
+              <div class="form-group text-left">
+                <label for="firstName">firstName</label>
+
+                  <input formControlName="firstName" type="text" class="form-control">
+
+              </div>
+
+
+
+
+              <div class="form-group text-left">
+                <label for="lastName">lastName</label>
+
+                  <input formControlName="lastName" type="text" class="form-control">
+
+              </div>
+
+
+        </div>
+        <div class="modal-footer">
+          <button (click)="addParticipant(myForm);" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+<!--
+<div class="modal fade" id="updateUserModal" tabindex="-1" role="dialog" aria-labelledby="updateUserModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="updateUserModalLabel">Update User</h4>
+      </div>
+      <form [formGroup]="myForm">
+        <div class="modal-body">
+
+
+
+            <div class="form-group text-left">
+              <label for="userId">userId</label>
+
+
+                <input [ngModel]="userId"formControlName="userId" type="text" class="form-control">
+
+
+            </div>
+
+
+              <div class="form-group text-left">
+                <label for="firstName">firstName</label>
+
+                  <input formControlName="firstName" type="text" class="form-control">
+
+              </div>
+
+
+
+
+              <div class="form-group text-left">
+                <label for="lastName">lastName</label>
+
+                  <input formControlName="lastName" type="text" class="form-control">
+
+              </div>
+        </div>
+        <div class="modal-footer">
+          <button (click)="updateParticipant(myForm)" type="submit" class="btn btn-success" data-dismiss="modal">Submit</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+-->
+
+<div class="modal fade" id="deleteUserModal" tabindex="-1" role="dialog" aria-labelledby="deleteUserModalLabel">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+        <h4 class="modal-title" id="deleteUserModalLabel">Delete User</h4>
+      </div>
+      <form [formGroup]="myForm" (ngSubmit)="deleteParticipant()">
+        <div class="modal-body">
+          Are you sure you want to delete this participant?
+        </div>
+        <div class="modal-footer">
+          <button (click)="deleteParticipant()" type="submit" class="btn btn-danger" data-dismiss="modal">Yes</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+<div class="container">
+	<div *ngIf="errorMessage" class="alert alert-danger" role="alert">
+		<strong>Error:</strong> {{errorMessage}}
+	</div>
+  <h1 id='participantName'>User</h1>
+  <div class="row">
+    <div class="col-md-12 text-right">
+      <button (click)="resetForm()" type="button" class="btn btn-primary" data-toggle="modal" data-target="#addUserModal">Add User</button>
+    </div>
+  </div>
+  <br>
+  <div class="row">
+    <div class="col-md-12">
+      <table class="table table-bordered table-responsive table-striped">
+        <thead class="thead">
+          <tr class="thead-cols">
+
+                <th class="info">userId</th>
+
+                <th class="info">firstName</th>
+
+                <th class="info">lastName</th>
+
+                <th class="info">Actions</th>
+
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let participant of allParticipants">
+
+
+                <td>{{participant.userId}}</td>
+
+                <td>{{participant.firstName}}</td>
+
+                <td>{{participant.lastName}}</td>
+
+            <td>
+              <!-- <button (click)="getForm(participant.userId);" type="button" class="btn btn-success" data-toggle="modal" data-target="#updateUserModal">Update User</button> -->
+
+              <button (click)="setId(participant.userId);" type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteUserModal">Delete User</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>

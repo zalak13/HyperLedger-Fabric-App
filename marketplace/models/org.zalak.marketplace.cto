@@ -1,0 +1,42 @@
+/**
+ * My Article Market place network
+ */
+namespace org.zalak.marketplace
+asset Article identified by articleId {
+    o String articleId
+    o String description
+    o Double price
+    o Boolean saleStatus
+    --> User seller
+}
+participant User identified by userId {
+    o String userId
+    o String firstName
+    o String lastName
+}
+transaction sellArticle {
+    --> Article article
+    --> User seller
+}
+
+transaction buyArticle {
+    --> Article article
+    --> User buyer
+}
+
+event sellArticleEventNotification {
+    o String eventName
+    --> Article article
+    --> User seller
+}
+
+event buyArticleEventNotification {
+    o String eventName
+    --> Article article
+    --> User seller
+    --> User buyer
+}
+
+event errorEventNotification {
+    o String eventName
+}

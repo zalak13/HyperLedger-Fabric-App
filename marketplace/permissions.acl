@@ -1,0 +1,52 @@
+/**
+ * Sample access control list.
+ */
+
+ rule NetworkAdminUser {
+     description: "Grant business network administrators full access to user resources"
+     participant: "org.hyperledger.composer.system.NetworkAdmin"
+     operation: ALL
+     resource: "**"
+     action: ALLOW
+ }
+
+ rule NetworkAdminSystem {
+     description: "Grant business network administrators full access to system resources"
+     participant: "org.hyperledger.composer.system.NetworkAdmin"
+     operation: ALL
+     resource: "org.hyperledger.composer.system.**"
+     action: ALLOW
+ }
+
+rule EverybodyCanReadEverything {
+    description: "Allow all participants read access to all resources"
+    participant: "org.zalak.marketplace.User"
+    operation: READ
+    resource: "org.zalak.marketplace.*"
+    action: ALLOW
+}
+
+rule EverybodyCanSubmitTransactions {
+    description: "Allow all participants to submit transactions"
+    participant: "org.zalak.marketplace.User"
+    operation: CREATE
+    resource: "org.zalak.marketplace.User"
+    action: ALLOW
+}
+
+rule onlyOwner {
+    description: "Allow owners to sell the articles to the buyer."
+    participant(m): "org.zalak.marketplace.User"
+    operation: UPDATE
+    resource(v): "org.zalak.marketplace.Article"
+    condition: (v.seller.userId == m.userId)
+    action: ALLOW
+}
+
+rule SystemACL {
+  description:  "System ACL to permit all access"
+  participant: "org.hyperledger.composer.system.Participant"
+  operation: ALL
+  resource: "org.hyperledger.composer.system.**"
+  action: ALLOW
+}
