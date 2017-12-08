@@ -8,7 +8,6 @@ Created a MarketPlace Use case using IBM Hyperledger Fabric
 
 # What it does:
 * The purpose of the DApp is to buy and sell commodities between the different accounts.
-* Different Account holders can be created using the Metamask interface.
 * Also the event monitoring process in order to maintain the single ledger for transactions.
 
 # Challenges:
